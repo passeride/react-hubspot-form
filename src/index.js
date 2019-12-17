@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import reactDOM from 'react-dom';
 
 let globalId = 0;
 
@@ -9,12 +9,12 @@ class HubspotForm extends React.Component {
 		    this.state = {
 			      loaded: false
 		    };
-		    this.id = globalId++;
+		    this.id = props.id_suffix ? props.id_suffix : globalId++;
 		    this.createForm = this.createForm.bind(this);
 		    this.findFormElement = this.findFormElement.bind(this);
 	  }
 	  createForm() {
-		    if (window.hbspt[this.id]) {
+		    if (window.hbspt) {
 			      // protect against component unmounting before window.hbspt is available
 			      if (this.el === null) {
 				        return;
@@ -34,7 +34,7 @@ class HubspotForm extends React.Component {
 					          this.props.onSubmit(formData);
 				        }
 			      };
-			      window.hbspt[this.id].forms.create(options);
+			      window.hbspt.forms.create(options);
 			      return true;
 		    }
 		    else{
@@ -69,7 +69,7 @@ class HubspotForm extends React.Component {
 		    }
 	  }
 	  componentDidMount() {
-		    if (!window.hbspt[this.id] && !this.props.noScript) {
+		    if (!window.hbspt && !this.props.noScript) {
 			      this.loadScript();
 		    } else {
 			      this.createForm();
