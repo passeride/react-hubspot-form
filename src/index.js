@@ -1,5 +1,5 @@
 import React from 'react';
-import reactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 
 let globalId = 0;
 
